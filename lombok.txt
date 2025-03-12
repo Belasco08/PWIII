@@ -1,0 +1,21 @@
+NO POM XML
+
+
+<dependency>
+	<groupId>org.projectlombok</groupId>
+	<artifactId>lombok</artifactId>
+	<optional>true</optional>
+</dependency> 
+
+
+baixa tudo oq precisar
+
+@Getter
+@Setter
+
+(Não Precisa fzr os Gets and Setters com alt + insert. Você só coloca os @ igual acima)
+
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
+@EqualsAndHashCode.Include (encima do campo que vc quer, aqui foi no encima do id)
