@@ -15,7 +15,7 @@ baixa tudo oq precisar
 
 (Não Precisa fzr os Gets and Setters com alt + insert. Você só coloca os @ igual acima)
 
-@Data
+@Data (é o @getter @setter juntos)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 @EqualsAndHashCode.Include (encima do campo que vc quer, aqui foi no encima do id)
