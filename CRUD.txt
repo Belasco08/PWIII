@@ -1,0 +1,50 @@
+                     CRUDS
+
+
+dentro do repository (aqui foi a cozinha repository)
+
+List<Cozinha> listar();
+     Cozinha buscar (Long id);
+     Cozinha salvar (Cozinha cozinha);
+     void remover (Long id);
+
+são as 4 estruturas do CRUD
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+agora, dentro do RepositoryImpl (aqui foi CozinhaRepositoryImpl, esta dentro do infrastructure)
+
+na linha do pubic class vc vai colocar "implements CozinhaRepository", vai dar erro, ai vc clica na lupinha vermelha e implementa os metodos.
+
+vai ficar assim:
+
+ 	public class CozinhaRepositoryImpl implements CozinhaRepository{
+
+
+dps encima do public class vc vai colocar um @Component
+
+dps vc vai colocar antes dos metodos:
+
+ @PersistenceContext
+ private EntityManager manager;
+
+vai ficar assim:
+
+		@Component
+		public class CozinhaRepositoryImpl implements CozinhaRepository{
+
+    		@PersistenceContext
+    		private EntityManager manager;
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+agora no metodo listar, vc vai mexer no return null.
+vc vai tirar o Null e coloca manager.createQuery("from Cozinha", Cozinha.class).getResultList();
+
+vai ficar assim:
+
+		 @Override
+   		 public List<Cozinha> listar() {
+           		 return manager.createQuery("from Cozinha", Cozinha.class).getResultList();
+    }
