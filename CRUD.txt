@@ -48,3 +48,44 @@ vai ficar assim:
    		 public List<Cozinha> listar() {
            		 return manager.createQuery("from Cozinha", Cozinha.class).getResultList();
     }
+
+
+
+agora no metodo buscar, vc vai mexer no return null.
+vc vai tirar o Null e coloca manager.find(Cozinha.class, id);
+
+vai ficar assim:
+
+		@Override
+		 public Cozinha buscar(Long id) {
+			 return manager.find(Cozinha.class, id);
+		  }
+
+
+
+
+agora no metodo salvar , vc vai mexer no return null.
+vc vai tirar o Null e coloca return manager.merge(cozinha) e coloca @Transactional (DO JAKARTA)
+
+vai ficar assim:
+
+		 @Transactional
+		    @Override
+		    public Cozinha salvar(Cozinha cozinha) {
+		        return manager.merge(cozinha);
+		    }
+
+
+
+agora no metodo remover , vc vai tirar o Return Null e colocar
+@Transactional (na linha de cima) e dps Cozinha cozinha = buscar(id);
+        manager.remove(cozinha);
+
+vai ficar assim:
+
+		@Transactional
+		    @Override
+		    public void remover(Long id) {
+		        Cozinha cozinha = buscar(id);
+		        manager.remove(cozinha);
+		    }
