@@ -1,6 +1,7 @@
 package com.caua.foodta.infrastructure.repository;
 
 import com.caua.foodta.domain.model.Cidade;
+import com.caua.foodta.domain.model.Estado;
 import com.caua.foodta.domain.repository.CidadeRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -21,7 +22,7 @@ public class CidadeRepositoryImpl implements CidadeRepository {
 
     @Override
     public Cidade buscar(Long id) {
-        return null;
+        return manager.find(Cidade.class, id);
     }
 
     @Override
@@ -31,6 +32,7 @@ public class CidadeRepositoryImpl implements CidadeRepository {
 
     @Override
     public void remover(Long id) {
-
+        Cidade cidade = buscar(id);
+        manager.remove(cidade);
     }
 }

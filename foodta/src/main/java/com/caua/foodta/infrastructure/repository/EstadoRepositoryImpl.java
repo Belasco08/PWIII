@@ -4,7 +4,6 @@ import com.caua.foodta.domain.model.Estado;
 import com.caua.foodta.domain.repository.EstadoRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,16 +21,17 @@ public class    EstadoRepositoryImpl implements EstadoRepository {
 
     @Override
     public Estado buscar(Long id) {
-        return null;
+        return manager.find(Estado.class, id);
     }
 
     @Override
-    public Estado salvar(Long id) {
-        return null;
+    public Estado salvar(Estado estado) {
+        return manager.merge(estado);
     }
 
     @Override
     public void remover(Long id) {
-
+        Estado estado = buscar(id);
+        manager.remove(estado);
     }
 }

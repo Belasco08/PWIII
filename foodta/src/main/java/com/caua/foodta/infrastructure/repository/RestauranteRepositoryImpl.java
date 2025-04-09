@@ -23,17 +23,18 @@ public class RestauranteRepositoryImpl implements RestauranteRepository {
     }
 
     @Override
-    public Restaurante salvar(Long id) {
-        return null;
+    public Restaurante salvar(Restaurante restaurante) {
+        return manager.merge(restaurante);
     }
 
     @Override
     public Restaurante buscar(Long id) {
-        return null;
+        return manager.find(Restaurante.class, id);
     }
 
     @Override
     public void remover(Long id) {
-
+        Restaurante restaurante = buscar(id);
+        manager.remove(restaurante);
     }
 }
