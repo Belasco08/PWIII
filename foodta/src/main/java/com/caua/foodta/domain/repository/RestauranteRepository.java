@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public interface RestauranteRepository {
     List<Restaurante> listar();
-    Restaurante salvar (Long id);
+    Restaurante salvar (Restaurante restaurante);
     Restaurante buscar (Long id);
     void remover (Long id);
 }

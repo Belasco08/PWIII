@@ -25,8 +25,8 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     }
 
     @Override
-    public Cidade salvar(Long id) {
-        return null;
+    public Cidade salvar(Cidade cidade) {
+        return manager.merge(cidade);
     }
 
     @Override
