@@ -4,6 +4,7 @@ package com.caua.foodta.api.controller;
 import com.caua.foodta.domain.Service.CozinhaService;
 import com.caua.foodta.domain.model.Cozinha;
 import com.caua.foodta.domain.repository.CozinhaRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,4 +42,18 @@ private CozinhaService cozinhaService;
     public Cozinha adicionar(@RequestBody Cozinha cozinha){
         return  cozinhaService.salvar(cozinha);
     }
+
+    @PutMapping("/{cozinhaId}")
+    public ResponseEntity<Cozinha> atualizar(@PathVariable Long cozinhaId,@RequestBody Cozinha cozinha){
+        Cozinha cozinhaAtual = cozinhaRepository.buscar(cozinhaId);
+        if (cozinhaAtual!= null){
+            BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
+            cozinhaAtual = cozinhaService.salvar(cozinhaAtual);
+            return ResponseEntity.ok(cozinhaAtual);
+        }
+        {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
+
