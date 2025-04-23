@@ -43,7 +43,7 @@ public class RestauranteController {
     public Restaurante adicionar(@RequestBody Restaurante restaurante){return restauranteService.salvar(restaurante);}
 
     @DeleteMapping("/{restauranteId}")
-    public  ResponseEntity<Cozinha> remover (Long restauranteId){
+    public  ResponseEntity<Restaurante> remover (Long restauranteId){
         try {
             restauranteService.excluir(restauranteId);
             return ResponseEntity.notFound().build();

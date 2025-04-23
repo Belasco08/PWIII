@@ -56,7 +56,7 @@ public class CidadeController {
          return  ResponseEntity.notFound().build();
     }
     @DeleteMapping("/{cidadeId}")
-    public  ResponseEntity<Cozinha> remover (Long cidadeId){
+    public  ResponseEntity<Cidade> remover (Long cidadeId){
         try {
             cidadeService.excluir(cidadeId);
             return ResponseEntity.notFound().build();

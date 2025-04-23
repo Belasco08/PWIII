@@ -46,7 +46,7 @@ public class FormaPagamentoController {
     }
 
     @DeleteMapping("/{formaPagamentoId}")
-    public  ResponseEntity<Cozinha> remover (Long formaPagamentoId){
+    public  ResponseEntity<FormaPagamento> remover (Long formaPagamentoId){
         try {
             formaPagamentoService.excluir(formaPagamentoId);
             return ResponseEntity.notFound().build();

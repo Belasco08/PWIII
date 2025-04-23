@@ -57,7 +57,7 @@ public class EstadoController {
         }
     }
     @DeleteMapping("/{estadoId}")
-    public  ResponseEntity<Cozinha> remover (Long estadoId){
+    public  ResponseEntity<Estado> remover (Long estadoId){
         try {
             estadoService.excluir(estadoId);
             return ResponseEntity.notFound().build();
