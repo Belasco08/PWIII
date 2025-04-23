@@ -2,6 +2,9 @@ package com.caua.foodta.api.controller;
 
 
 import com.caua.foodta.domain.Service.EstadoService;
+import com.caua.foodta.domain.exception.EntidadeEmUsoException;
+import com.caua.foodta.domain.exception.EntidadeNaoEncontradaException;
+import com.caua.foodta.domain.model.Cozinha;
 import com.caua.foodta.domain.model.Estado;
 import com.caua.foodta.domain.repository.EstadoRepository;
 import org.springframework.beans.BeanUtils;
@@ -51,6 +54,19 @@ public class EstadoController {
         }
         {
             return ResponseEntity.notFound().build();
+        }
+    }
+    @DeleteMapping("/{estadoId}")
+    public  ResponseEntity<Cozinha> remover (Long estadoId){
+        try {
+            estadoService.excluir(estadoId);
+            return ResponseEntity.notFound().build();
+        }
+        catch (EntidadeNaoEncontradaException e){
+            return ResponseEntity.notFound().build();
+        }
+        catch (EntidadeEmUsoException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
 }

@@ -1,7 +1,10 @@
 package com.caua.foodta.api.controller;
 
 import com.caua.foodta.domain.Service.CidadeService;
+import com.caua.foodta.domain.exception.EntidadeEmUsoException;
+import com.caua.foodta.domain.exception.EntidadeNaoEncontradaException;
 import com.caua.foodta.domain.model.Cidade;
+import com.caua.foodta.domain.model.Cozinha;
 import com.caua.foodta.domain.repository.CidadeRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +54,18 @@ public class CidadeController {
             return ResponseEntity.ok(cidadeAtual);
         }
          return  ResponseEntity.notFound().build();
+    }
+    @DeleteMapping("/{cidadeId}")
+    public  ResponseEntity<Cozinha> remover (Long cidadeId){
+        try {
+            cidadeService.excluir(cidadeId);
+            return ResponseEntity.notFound().build();
+        }
+        catch (EntidadeNaoEncontradaException e){
+            return ResponseEntity.notFound().build();
+        }
+        catch (EntidadeEmUsoException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
     }
 }

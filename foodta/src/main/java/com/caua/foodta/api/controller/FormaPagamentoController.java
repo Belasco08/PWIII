@@ -2,6 +2,9 @@ package com.caua.foodta.api.controller;
 
 
 import com.caua.foodta.domain.Service.FormaPagamentoService;
+import com.caua.foodta.domain.exception.EntidadeEmUsoException;
+import com.caua.foodta.domain.exception.EntidadeNaoEncontradaException;
+import com.caua.foodta.domain.model.Cozinha;
 import com.caua.foodta.domain.model.FormaPagamento;
 import com.caua.foodta.domain.repository.FormaPagamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +45,17 @@ public class FormaPagamentoController {
         return formaPagamentoService.salvar(formaPagamento);
     }
 
+    @DeleteMapping("/{formaPagamentoId}")
+    public  ResponseEntity<Cozinha> remover (Long formaPagamentoId){
+        try {
+            formaPagamentoService.excluir(formaPagamentoId);
+            return ResponseEntity.notFound().build();
+        }
+        catch (EntidadeNaoEncontradaException e){
+            return ResponseEntity.notFound().build();
+        }
+        catch (EntidadeEmUsoException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+    }
 }

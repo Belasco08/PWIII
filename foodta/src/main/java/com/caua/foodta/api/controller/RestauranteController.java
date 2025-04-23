@@ -2,6 +2,9 @@ package com.caua.foodta.api.controller;
 
 
 import com.caua.foodta.domain.Service.RestauranteService;
+import com.caua.foodta.domain.exception.EntidadeEmUsoException;
+import com.caua.foodta.domain.exception.EntidadeNaoEncontradaException;
+import com.caua.foodta.domain.model.Cozinha;
 import com.caua.foodta.domain.model.Restaurante;
 import com.caua.foodta.domain.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +41,19 @@ public class RestauranteController {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Restaurante adicionar(@RequestBody Restaurante restaurante){return restauranteService.salvar(restaurante);}
+
+    @DeleteMapping("/{restauranteId}")
+    public  ResponseEntity<Cozinha> remover (Long restauranteId){
+        try {
+            restauranteService.excluir(restauranteId);
+            return ResponseEntity.notFound().build();
+        }
+        catch (EntidadeNaoEncontradaException e){
+            return ResponseEntity.notFound().build();
+        }
+        catch (EntidadeEmUsoException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+    }
 
 }
