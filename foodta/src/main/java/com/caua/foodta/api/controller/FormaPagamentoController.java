@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -27,22 +28,22 @@ public class FormaPagamentoController {
 
     @GetMapping()
     public List<com.caua.foodta.domain.model.FormaPagamento> listar(){
-        return formaPagamentoRepository.listar();
+        return formaPagamentoRepository.findAll();
     }
 
     @GetMapping("/{formaPagamentoId}")
     public ResponseEntity<FormaPagamento> buscar (@PathVariable Long formapagamentoId){
-        FormaPagamento formaPagamento = formaPagamentoRepository.buscar(formapagamentoId);
-        if (formaPagamento!= null){
-        return ResponseEntity.ok(formaPagamento);
+        Optional<FormaPagamento> formaPagamento = formaPagamentoRepository.findById(formapagamentoId);
+        if (formaPagamento.isPresent()){
+        return ResponseEntity.ok(formaPagamento.get());
         }
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public FormaPagamento adicionar(@RequestBody FormaPagamento formaPagamento){
-        return formaPagamentoService.salvar(formaPagamento);
+    public ResponseEntity<FormaPagamento> adicionar(@RequestBody FormaPagamento formaPagamento){
+        formaPagamento = formaPagamentoService.salvar(formaPagamento);
+        return ResponseEntity.status(HttpStatus.CREATED).body(formaPagamento);
     }
 
     @DeleteMapping("/{formaPagamentoId}")

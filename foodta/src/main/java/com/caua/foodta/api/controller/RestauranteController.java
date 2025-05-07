@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/restaurantes")
@@ -26,21 +27,23 @@ public class RestauranteController {
 
     @GetMapping
     public List<Restaurante> listar(){
-        return restauranteRepository.listar();
+        return restauranteRepository.findAll();
     }
 
     @GetMapping("/{restauranteId}")
     public ResponseEntity<Restaurante> buscar(@PathVariable Long restauranteId){
-        Restaurante restaurante = restauranteRepository.buscar(restauranteId);
-        if(restaurante != null){
-            return ResponseEntity.ok(restaurante);
+        Optional<Restaurante> restaurante = restauranteRepository.findById(restauranteId);
+        if(restaurante.isPresent()){
+            return ResponseEntity.ok(restaurante.get());
         }
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Restaurante adicionar(@RequestBody Restaurante restaurante){return restauranteService.salvar(restaurante);}
+    public ResponseEntity<Restaurante> adicionar(@RequestBody Restaurante restaurante){
+        restaurante = restauranteService.salvar(restaurante);
+        return ResponseEntity.status(HttpStatus.CREATED).body(restaurante); }
 
     @DeleteMapping("/{restauranteId}")
     public  ResponseEntity<Restaurante> remover (Long restauranteId){

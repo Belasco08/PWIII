@@ -16,12 +16,12 @@ public class CidadeService {
     private CidadeRepository cidadeRepository;
 
     public Cidade salvar(Cidade cidade){
-        return cidadeRepository.salvar(cidade);
+        return cidadeRepository.save(cidade);
     }
 
     public void excluir (Long id){
         try {
-            cidadeRepository.remover(id);
+            cidadeRepository.deleteById(id);
         }
         catch (DataIntegrityViolationException e){
             throw  new EntidadeEmUsoException(String.format("Cidade ou codigo %d não pode ser encontrado, pois está em uso", id));
