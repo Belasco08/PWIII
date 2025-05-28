@@ -23,5 +23,11 @@ public class Restaurante {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cozinha_id")
     private Cozinha cozinha;
+    @Column(name = "taxa_frete")
+    private BigDecimal taxa_frete;
+
+
+    @Embedded
+    private Endereco endereco;
 
 }

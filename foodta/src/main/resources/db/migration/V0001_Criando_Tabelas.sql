@@ -1,39 +1,39 @@
-Create table tb_cozinhas(
+Create table cozinha(
     id bigint not null auto_increment,
     nome_cozinha varchar(70),
 
     primary key (id)
 ) engine=InnoDB default charset=utf8;
 
-Create table tb_estados(
+Create table estado(
     id bigint not null primary key auto_increment,
     nome varchar(100)
 )engine=InnoDB default charset=utf8;
 
-Create table tb_cidade(
+Create table cidade(
 id bigint not null primary key auto_increment,
 nome varchar(100),
 estado_id bigint not null
 )engine=InnoDB default charset=utf8;
 
-Create table tb_forma_pagamento(
+Create table forma_pagamento(
     id bigint not null primary key auto_increment,
     descricao varchar(255)
 )engine=InnoDB default charset=utf8;
 
-Create table tb_restaurantes(
+Create table restaurantes(
     id bigint not null primary key auto_increment,
     nome varchar(100),
     taxa_frete decimal,
     restaurante_id bigint not null
  )engine=InnoDB default charset=utf8;
 
-Create table tb_grupo(
+Create table grupo(
     id bigint not null primary key auto_increment,
     nome varchar(60) not null
     )engine=InnoDB default charset=utf8;
 
-Create table tb_grupo_permissao(
+Create table grupo_permissao(
     grupo_id bigint not null,
     permissao_id bigint not null,
     primary key(grupo_id, permissao_id)

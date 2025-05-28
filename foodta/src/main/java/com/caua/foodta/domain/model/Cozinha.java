@@ -19,4 +19,5 @@ public class Cozinha {
     @Column(name="nome_cozinha", length = 50)
     private String nome;
 
+
 }
