@@ -2,12 +2,15 @@ package com.caua.foodta.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 @Table(name = "tb_restaurante")
 
@@ -19,6 +22,7 @@ public class Restaurante {
     private Long id;
     private String nome;
 
+    @NotBlank(message = "Taxa Obrigatorio")
     @Column(name = "taxa_frete")
     private BigDecimal taxaFrete;
 

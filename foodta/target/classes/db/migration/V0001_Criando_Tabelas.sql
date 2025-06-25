@@ -11,9 +11,9 @@ Create table estado(
 )engine=InnoDB default charset=utf8;
 
 Create table cidade(
-id bigint not null primary key auto_increment,
-nome varchar(100),
-estado_id bigint not null
+    id bigint not null primary key auto_increment,
+    nome varchar(100),
+    estado_id bigint not null
 )engine=InnoDB default charset=utf8;
 
 Create table forma_pagamento(
