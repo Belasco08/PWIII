@@ -1,0 +1,1 @@
+alter table aluno add constraint fk_aluno_curso foreign key (curso_id) references Curso (id);

@@ -39,7 +39,7 @@ public class CursoController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping()
+    @PostMapping("/{cursoId}")
     public ResponseEntity <Curso> adicionar(@RequestBody Curso curso) {
         curso = cursoService.salvar(curso);
         return ResponseEntity.status(HttpStatus.CREATED).body(curso);

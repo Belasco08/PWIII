@@ -39,7 +39,7 @@ public class AlunoController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping()
+    @PostMapping("/{alunoId}")
     public ResponseEntity <Aluno> adicionar(@RequestBody Aluno aluno) {
         aluno = alunoService.salvar(aluno);
         return ResponseEntity.status(HttpStatus.CREATED).body(aluno);
